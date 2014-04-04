@@ -13,7 +13,7 @@ cat /kafka/config/server.properties.tmpl \
   | sed "s|{{BROKER_ID}}|${BROKER_ID:-0}|g" \
   | sed "s|{{CHROOT}}|${CHROOT:-}|g" \
   | sed "s|{{EXPOSED_HOSTNAME}}|${EXPOSED_HOSTNAME:-$IP}|g" \
-  | sed "s|{{EXPOSED_PORT}}|${EXPOSED_PORT:-$PORT}|g" \
+  | sed "s|{{EXPOSED_PORT}}|${EXPOSED_PORT:-9092}|g" \
    > /kafka/config/server.properties
 
 echo "Starting kafka"
