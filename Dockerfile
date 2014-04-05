@@ -16,5 +16,5 @@ EXPOSE 9092 7203
 
 CMD ["kafka/start.sh"]
 
-ADD server.properties /kafka/config/server.properties.tmpl
+ADD config /kafka/config
 ADD start.sh kafka/start.sh
