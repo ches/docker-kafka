@@ -40,7 +40,7 @@ cat /kafka/config/server.properties${EXTENSION} \
   | sed "s|{{ZOOKEEPER_IP}}|${ZOOKEEPER_IP}|g" \
   | sed "s|{{BROKER_ID}}|${BROKER_ID:-0}|g" \
   | sed "s|{{CHROOT}}|${CHROOT:-}|g" \
-  | sed "s|{{EXPOSED_HOSTNAME}}|${EXPOSED_HOSTNAME:-$IP}|g" \
+  | sed "s|{{EXPOSED_HOST}}|${EXPOSED_HOST:-$IP}|g" \
   | sed "s|{{EXPOSED_PORT}}|${EXPOSED_PORT:-9092}|g" \
    > /kafka/config/server.properties
 
