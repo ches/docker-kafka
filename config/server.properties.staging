@@ -22,7 +22,7 @@ auto.leader.rebalance.enable=true
 
 # Replication
 auto.create.topics.enable=true
-default.replication.factor=2
+default.replication.factor=1
 
 # Hostname the broker will advertise to consumers. If not set, kafka will use the value returned
 # from InetAddress.getLocalHost().  If there are multiple interfaces getLocalHost
@@ -37,7 +37,7 @@ port={{EXPOSED_PORT}}
 ############################# Log Basics #############################
 
 # The directory under which to store log files
-log.dir=/data
+log.dirs=/data
 
 # The number of logical partitions per topic per server. More partitions allow greater parallelism
 # for consumption, but also mean more files.
@@ -61,3 +61,4 @@ log.retention.hours=168
 # You can also append an optional chroot string to the urls to specify the
 # root directory for all kafka znodes.
 zookeeper.connect={{ZOOKEEPER_IP}}:2181{{CHROOT}}
+zookeeper.connection.timeout.ms=1000000

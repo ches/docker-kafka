@@ -14,7 +14,7 @@ VOLUME [ "/data", "/logs" ]
 # primary, jmx
 EXPOSE 9092 7203
 
-CMD ["kafka/start.sh"]
+CMD ["/start.sh"]
 
 ADD config /kafka/config
-ADD start.sh kafka/start.sh
+ADD start.sh /start.sh
