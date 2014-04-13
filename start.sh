@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # Necessary?
 export JMX_PORT=7203
