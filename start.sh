@@ -10,12 +10,14 @@ case $BRANCH in
     CHROOT="/v0_8_1"
 
     # TODO Service discovery
+    ZOOKEEPER_PORT=${ZOOKEEPER_PORT:-2181}
   ;;
   staging)
     EXTENSION=".staging"
     CHROOT="/v0_8_1"
 
     # TODO Service discovery
+    ZOOKEEPER_PORT=${ZOOKEEPER_PORT:-2181}
   ;;
   *)
     # Developer environments, etc.
@@ -26,7 +28,7 @@ case $BRANCH in
   ;;
 esac
 
-if [ -z $ZOOKEEPER_IP -o -z $ZOOKEEPER_PORT ]; then
+if [ -z "$ZOOKEEPER_IP" -o -z "$ZOOKEEPER_PORT" ]; then
   echo "No valid ZOOKEEPER IP and port set! ${BRANCH}"
   exit -1
 fi
