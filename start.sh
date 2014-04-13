@@ -10,7 +10,6 @@ case $BRANCH in
     CHROOT="/v0_8_1"
 
     # TODO Service discovery
-    ZOOKEEPER_IP=
   ;;
   staging)
     EXTENSION=".staging"
