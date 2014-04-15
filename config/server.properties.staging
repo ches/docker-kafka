@@ -32,7 +32,8 @@ advertised.host.name={{EXPOSED_HOST}}
 ############################# Socket Server Settings #############################
 
 # The port the socket server listens on
-port={{EXPOSED_PORT}}
+port={{PORT}}
+advertised.port={{EXPOSED_PORT}}
 
 ############################# Log Basics #############################
 
@@ -61,4 +62,4 @@ log.retention.hours=168
 # You can also append an optional chroot string to the urls to specify the
 # root directory for all kafka znodes.
 zookeeper.connect={{ZOOKEEPER_IP}}:{{ZOOKEEPER_PORT}}{{CHROOT}}
-zookeeper.connection.timeout.ms=1000000
+zookeeper.connection.timeout.ms=6000

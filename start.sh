@@ -44,6 +44,7 @@ cat /kafka/config/server.properties${EXTENSION} \
   | sed "s|{{BROKER_ID}}|${BROKER_ID:-0}|g" \
   | sed "s|{{CHROOT}}|${CHROOT:-}|g" \
   | sed "s|{{EXPOSED_HOST}}|${EXPOSED_HOST:-$IP}|g" \
+  | sed "s|{{PORT}}|${PORT:-9092}|g" \
   | sed "s|{{EXPOSED_PORT}}|${EXPOSED_PORT:-9092}|g" \
    > /kafka/config/server.properties
 
