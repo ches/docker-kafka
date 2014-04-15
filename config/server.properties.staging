@@ -38,6 +38,7 @@ advertised.port={{EXPOSED_PORT}}
 ############################# Log Basics #############################
 
 # The directory under which to store log files
+log.dir=/data
 log.dirs=/data
 
 # The number of logical partitions per topic per server. More partitions allow greater parallelism
