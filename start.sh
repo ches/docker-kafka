@@ -22,6 +22,7 @@ case $BRANCH in
   *)
     # Developer environments, etc.
     EXTENSION=".default"
+    EXPOSED_HOST="127.0.0.1"
     ZOOKEEPER_IP=${ZOOKEEPER_IP:-$ZOOKEEPER_PORT_2181_TCP_ADDR}
     ZOOKEEPER_PORT=${ZOOKEEPER_PORT:-$ZOOKEEPER_PORT_2181_TCP_PORT}
 
@@ -39,6 +40,7 @@ PORT=9092
 
 cat /kafka/config/server.properties${EXTENSION} \
   | sed "s|{{ZOOKEEPER_IP}}|${ZOOKEEPER_IP}|g" \
+  | sed "s|{{ZOOKEEPER_PORT}}|${ZOOKEEPER_PORT}|g" \
   | sed "s|{{BROKER_ID}}|${BROKER_ID:-0}|g" \
   | sed "s|{{CHROOT}}|${CHROOT:-}|g" \
   | sed "s|{{EXPOSED_HOST}}|${EXPOSED_HOST:-$IP}|g" \
