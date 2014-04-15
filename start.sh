@@ -42,5 +42,7 @@ cat /kafka/config/server.properties${EXTENSION} \
   | sed "s|{{EXPOSED_PORT}}|${EXPOSED_PORT:-9092}|g" \
    > /kafka/config/server.properties
 
+export CLASSPATH=$CLASSPATH:/kafka/lib/slf4j-log4j12.jar
+
 echo "Starting kafka"
 /kafka/bin/kafka-server-start.sh /kafka/config/server.properties 2>&1 | tee /logs/kafka.log
