@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 # Necessary?
-export JMX_PORT=7203
+JMX_PORT=7203
 
 EXTENSION=""
 case $BRANCH in
@@ -28,12 +28,6 @@ case $BRANCH in
 
   ;;
 esac
-
-if [ -z "$ZOOKEEPER_IP" -o -z "$ZOOKEEPER_PORT" ]; then
-  echo "No valid ZOOKEEPER IP and port set! ${BRANCH}"
-  exit -1
-fi
-
 
 IP=$(cat /etc/hosts | head -n1 | awk '{print $1}')
 PORT=9092
