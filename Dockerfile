@@ -14,7 +14,7 @@ VOLUME [ "/data", "/logs" ]
 # primary, jmx
 EXPOSE 9092 7203
 
-ADD http://artifactory.amz.relateiq.com/artifactory/repo1-cache/org/slf4j/slf4j-log4j12/1.7.6/slf4j-log4j12-1.7.6.jar /kafka/lib/slf4j-log4j12.jar
+ADD http://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.6/slf4j-log4j12-1.7.6.jar /kafka/lib/slf4j-log4j12.jar
 ADD config /kafka/config
 ADD start.sh /start.sh
 
