@@ -1,20 +1,18 @@
 #!/bin/bash -x
 
-# Necessary?
-JMX_PORT=7203
 
 EXTENSION=""
 case $BRANCH in
   master)
     EXTENSION=".prod"
-    CHROOT="/v0_8_1"
+    CHROOT="/v0_8_1_1"
 
     # TODO Service discovery
     ZOOKEEPER_PORT=${ZOOKEEPER_PORT:-2181}
   ;;
   staging)
     EXTENSION=".staging"
-    CHROOT="/v0_8_1"
+    CHROOT="/v0_8_1_1"
 
     # TODO Service discovery
     ZOOKEEPER_PORT=${ZOOKEEPER_PORT:-2181}
@@ -43,6 +41,7 @@ cat /kafka/config/server.properties${EXTENSION} \
    > /kafka/config/server.properties
 
 export CLASSPATH=$CLASSPATH:/kafka/lib/slf4j-log4j12.jar
+export JMX_PORT=7203
 
 echo "Starting kafka"
 /kafka/bin/kafka-server-start.sh /kafka/config/server.properties 2>&1 | tee /logs/kafka.log
