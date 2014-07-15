@@ -1,7 +1,20 @@
 Running
 =======
 
-```build
+### Provisioning
+
+```bash
+
+knife ec2 server create -N 'usw2a-kafka4-prod' -r 'role[base], recipe[apt], recipe[raid]' -E 'prod' -x 'ubuntu' -f m1.xlarge -I 'ami-8eea71be' -Z 'us-west-2a' --region 'us-west-2' -g 'sg-57f21538' -s 'subnet-eb6b619f' -S 'us-west-2-chef2' --ephemeral '/dev/sdb,/dev/sdc,/dev/sdd,/dev/sde' -i ~/.chef/us-west-2-chef2.pem --no-host-key-verify
+
+knife ec2 server create -N 'usw2b-kafka4-prod' -r 'role[base], recipe[apt], recipe[raid]' -E 'prod' -x 'ubuntu' -f m1.xlarge -I 'ami-8eea71be' -Z 'us-west-2b' --region 'us-west-2' -g 'sg-57f21538' -s 'subnet-1a38b172' -S 'us-west-2-chef2' --ephemeral '/dev/sdb,/dev/sdc,/dev/sdd,/dev/sde' -i ~/.chef/us-west-2-chef2.pem --no-host-key-verify
+
+knife ec2 server create -N 'usw2c-kafka4-prod' -r 'role[base], recipe[apt], recipe[raid]' -E 'prod' -x 'ubuntu' -f m1.xlarge -I 'ami-8eea71be' -Z 'us-west-2c' --region 'us-west-2' -g 'sg-57f21538' -s 'subnet-fa7f4abc' -S 'us-west-2-chef2' --ephemeral '/dev/sdb,/dev/sdc,/dev/sdd,/dev/sde' -i ~/.chef/us-west-2-chef2.pem --no-host-key-verify
+```
+
+### Build
+
+```bash
 docker build -t "kafka":0.8.1.1 .
 ```
 
