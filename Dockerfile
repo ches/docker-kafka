@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN mkdir /data /logs /kafka
 
-RUN wget --progress=dot:mega -O - https://s3-us-west-1.amazonaws.com/relateiq-build-resources/kafka_2.9.2-0.8.1.1.tgz | tar -zx -C /kafka --strip-components=1
+RUN wget --progress=dot:mega -O - https://s3-us-west-1.amazonaws.com/relateiq-build-resources/kafka_2.10-0.8.1.1.tgz | tar -zx -C /kafka --strip-components=1
 
 # RUN cd kafka && ./gradlew jar
 
