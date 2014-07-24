@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 # Necessary?
-JMX_PORT=7203
+export JMX_PORT=7203
 
 EXTENSION=""
 case $BRANCH in
