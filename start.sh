@@ -5,14 +5,14 @@ EXTENSION=""
 case $BRANCH in
   master)
     EXTENSION=".prod"
-    CHROOT="/v0_8_1_1"
+    CHROOT="/v0_8_1"
 
     # TODO Service discovery
     ZOOKEEPER_PORT=${ZOOKEEPER_PORT:-2181}
   ;;
   staging)
     EXTENSION=".staging"
-    CHROOT="/v0_8_1_1"
+    CHROOT="/v0_8_1"
 
     # TODO Service discovery
     ZOOKEEPER_PORT=${ZOOKEEPER_PORT:-2181}

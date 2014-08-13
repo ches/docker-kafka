@@ -64,3 +64,6 @@ log.retention.hours=168
 # root directory for all kafka znodes.
 zookeeper.connect={{ZOOKEEPER_IP}}:{{ZOOKEEPER_PORT}}{{CHROOT}}
 zookeeper.connection.timeout.ms=10000
+controlled.shutdown.enable=true
+zookeeper.session.timeout.ms=10000
+
