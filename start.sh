@@ -45,4 +45,4 @@ export CLASSPATH=$CLASSPATH:/kafka/lib/slf4j-log4j12.jar
 export JMX_PORT=7203
 
 echo "Starting kafka"
-/kafka/bin/kafka-server-start.sh /kafka/config/server.properties 2>&1 | tee /logs/kafka.log
+exec /kafka/bin/kafka-server-start.sh /kafka/config/server.properties
