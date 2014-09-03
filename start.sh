@@ -21,7 +21,7 @@ case $BRANCH in
   *)
     # Developer environments, etc.
     EXTENSION=".default"
-    EXPOSED_HOST="127.0.0.1"
+    [ -z "$EXPOSED_HOST" ] && EXPOSED_HOST="127.0.0.1"
     ZOOKEEPER_IP=$ZOOKEEPER_PORT_2181_TCP_ADDR
     ZOOKEEPER_PORT=$ZOOKEEPER_PORT_2181_TCP_PORT
 
