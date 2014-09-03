@@ -5,9 +5,15 @@ RUN apt-get update && apt-get install -y \
 
 RUN mkdir /data /logs /kafka
 
-RUN wget --progress=dot:mega -O - https://s3-us-west-1.amazonaws.com/relateiq-build-resources/kafka_2.10-0.8.1.1.tgz | tar -zx -C /kafka --strip-components=1
-
-# RUN cd kafka && ./gradlew jar
+# Install Kafka binary distribution to /kafka
+# Haven't figured out why the .md5 server doesn't like wget, so inlining digest
+RUN cd /tmp && \
+  wget --progress=dot:mega http://www.us.apache.org/dist/kafka/0.8.1.1/kafka_2.10-0.8.1.1.tgz && \
+  echo VERIFY CHECKSUM: && \
+  gpg --print-md MD5 kafka_2.10-0.8.1.1.tgz 2>/dev/null && \
+  echo 'kafka_2.10-0.8.1.1.tgz: F3 F7 44 67 88 D9 A0 6F  6B FA BA 72 91 2B D8 CF' && \
+  tar -zx -C /kafka --strip-components=1 -f kafka_2.10-0.8.1.1.tgz && \
+  rm -rf kafka_*
 
 VOLUME [ "/data", "/logs" ]
 
@@ -19,3 +25,4 @@ ADD config /kafka/config
 ADD start.sh /start.sh
 
 CMD ["/start.sh"]
+
