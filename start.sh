@@ -1,5 +1,10 @@
 #!/bin/bash -x
 
+# If a ZooKeeper container is linked with the alias `zookeeper`, use it.
+# TODO Service discovery otherwise
+[ -n "$ZOOKEEPER_PORT_2181_TCP_ADDR" ] && ZOOKEEPER_IP=$ZOOKEEPER_PORT_2181_TCP_ADDR
+[ -n "$ZOOKEEPER_PORT_2181_TCP_PORT" ] && ZOOKEEPER_PORT=$ZOOKEEPER_PORT_2181_TCP_PORT
+
 # Necessary?
 
 EXTENSION=""
@@ -7,23 +12,14 @@ case $BRANCH in
   master)
     EXTENSION=".prod"
     CHROOT="/v0_8_1"
-
-    # TODO Service discovery
-    ZOOKEEPER_PORT=${ZOOKEEPER_PORT:-2181}
   ;;
   staging)
     EXTENSION=".staging"
     CHROOT="/v0_8_1"
-
-    # TODO Service discovery
-    ZOOKEEPER_PORT=${ZOOKEEPER_PORT:-2181}
   ;;
   *)
     # Developer environments, etc.
     EXTENSION=".default"
-    ZOOKEEPER_IP=$ZOOKEEPER_PORT_2181_TCP_ADDR
-    ZOOKEEPER_PORT=$ZOOKEEPER_PORT_2181_TCP_PORT
-
   ;;
 esac
 
@@ -32,7 +28,7 @@ PORT=9092
 
 cat /kafka/config/server.properties${EXTENSION} \
   | sed "s|{{ZOOKEEPER_IP}}|${ZOOKEEPER_IP}|g" \
-  | sed "s|{{ZOOKEEPER_PORT}}|${ZOOKEEPER_PORT}|g" \
+  | sed "s|{{ZOOKEEPER_PORT}}|${ZOOKEEPER_PORT:-2181}|g" \
   | sed "s|{{BROKER_ID}}|${BROKER_ID:-0}|g" \
   | sed "s|{{CHROOT}}|${CHROOT:-}|g" \
   | sed "s|{{EXPOSED_HOST}}|${EXPOSED_HOST:-$IP}|g" \
