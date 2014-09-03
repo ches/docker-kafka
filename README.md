@@ -35,17 +35,17 @@ $ ZK_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' zookeeper)
 $ KAFKA_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' kafka)
 
 $ docker run --rm ches/kafka \
->   /kafka/bin/kafka-topics.sh --create --topic test \
+>   kafka-topics.sh --create --topic test \
 >     --replication-factor 1 --partitions 1 --zookeeper $ZK_IP:2181
 Created topic "test".
 
 # In separate terminals:
 $ docker run --rm --interactive ches/kafka \
->   /kafka/bin/kafka-console-producer.sh --topic test --broker-list $KAFKA_IP:9092
+>   kafka-console-producer.sh --topic test --broker-list $KAFKA_IP:9092
 <type some messages followed by newline>
 
 $ docker run --rm ches/kafka \
->  /kafka/bin/kafka-console-consumer.sh --topic test --from-beginning --zookeeper $ZK_IP:2181
+>   kafka-console-consumer.sh --topic test --from-beginning --zookeeper $ZK_IP:2181
 ```
 
 ### Volumes

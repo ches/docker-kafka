@@ -24,5 +24,7 @@ ADD http://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.6/slf4j-log4j12-1.
 ADD config /kafka/config
 ADD start.sh /start.sh
 
+ENV PATH /kafka/bin:$PATH
+
 CMD ["/start.sh"]
 
