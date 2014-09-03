@@ -29,22 +29,22 @@ from [the Kafka Quick Start]:
 
 ```
 $ docker run -d --name zookeeper jplock/zookeeper:3.4.6
-$ docker run -d --name kafka --link zookeeper:zookeeper relateiq/kafka
+$ docker run -d --name kafka --link zookeeper:zookeeper ches/kafka
 
 $ ZK_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' zookeeper)
 $ KAFKA_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' kafka)
 
-$ docker run --rm relateiq/kafka \
+$ docker run --rm ches/kafka \
 >   /kafka/bin/kafka-topics.sh --create --topic test \
 >     --replication-factor 1 --partitions 1 --zookeeper $ZK_IP:2181
 Created topic "test".
 
 # In separate terminals:
-$ docker run --rm --interactive relateiq/kafka \
+$ docker run --rm --interactive ches/kafka \
 >   /kafka/bin/kafka-console-producer.sh --topic test --broker-list $KAFKA_IP:9092
 <type some messages followed by newline>
 
-$ docker run --rm relateiq/kafka \
+$ docker run --rm ches/kafka \
 >  /kafka/bin/kafka-console-consumer.sh --topic test --from-beginning --zookeeper $ZK_IP:2181
 ```
 
@@ -89,7 +89,7 @@ $ docker run -d \
     --volume ./data:/data --volume ./logs:/logs \
     --publish 9092:9092 --publish 7203:7203 \
     --env EXPOSED_HOST=127.0.0.1 --env ZOOKEEPER_IP=127.0.0.1 \
-    relateiq/kafka
+    ches/kafka
 ```
 
 Configuration
