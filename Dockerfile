@@ -6,11 +6,7 @@
 FROM relateiq/oracle-java7
 MAINTAINER Ches Martin <ches@whiskeyandgrits.net>
 
-# primary, jmx
-EXPOSE 9092 7203
-VOLUME [ "/data", "/logs" ]
-
-RUN mkdir /kafka
+RUN mkdir /kafka /data /logs
 
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -37,8 +33,17 @@ ADD http://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.6/slf4j-log4j12-1.
 ADD config /kafka/config
 ADD start.sh /start.sh
 
-WORKDIR /
+# Set up a user to run Kafka
+RUN groupadd kafka && \
+  useradd -d /kafka -g kafka -s /bin/false kafka && \
+  chown -R kafka:kafka /kafka /data /logs
+USER kafka
 ENV PATH /kafka/bin:$PATH
+WORKDIR /kafka
+
+# primary, jmx
+EXPOSE 9092 7203
+VOLUME [ "/data", "/logs" ]
 
 CMD ["/start.sh"]
 
