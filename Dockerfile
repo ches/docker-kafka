@@ -6,17 +6,19 @@
 FROM relateiq/oracle-java7
 MAINTAINER Ches Martin <ches@whiskeyandgrits.net>
 
+# The Scala 2.10 build is currently recommended by the project.
+ENV KAFKA_VERSION=0.8.2.1 KAFKA_SCALA_VERSION=2.10
+ENV KAFKA_RELEASE_ARCHIVE kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz
+
 RUN mkdir /kafka /data /logs
 
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
     ca-certificates
 
-ENV KAFKA_RELEASE_ARCHIVE kafka_2.10-0.8.1.1.tgz
-
 # Download Kafka binary distribution
-ADD http://www.us.apache.org/dist/kafka/0.8.1.1/${KAFKA_RELEASE_ARCHIVE} /tmp/
-ADD https://dist.apache.org/repos/dist/release/kafka/0.8.1.1/${KAFKA_RELEASE_ARCHIVE}.md5 /tmp/
+ADD http://www.us.apache.org/dist/kafka/${KAFKA_VERSION}/${KAFKA_RELEASE_ARCHIVE} /tmp/
+ADD https://dist.apache.org/repos/dist/release/kafka/${KAFKA_VERSION}/${KAFKA_RELEASE_ARCHIVE}.md5 /tmp/
 
 WORKDIR /tmp
 
