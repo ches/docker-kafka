@@ -34,7 +34,6 @@ RUN echo VERIFY CHECKSUM: && \
 RUN tar -zx -C /kafka --strip-components=1 -f ${KAFKA_RELEASE_ARCHIVE} && \
   rm -rf kafka_*
 
-ADD http://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.6/slf4j-log4j12-1.7.6.jar /kafka/libs/
 ADD config /kafka/config
 ADD start.sh /start.sh
 
