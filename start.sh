@@ -11,11 +11,11 @@ EXTENSION=""
 case $BRANCH in
   master)
     EXTENSION=".prod"
-    CHROOT="/v0_8_1"
+    CHROOT="/v0_8_2"
   ;;
   staging)
     EXTENSION=".staging"
-    CHROOT="/v0_8_1"
+    CHROOT="/v0_8_2"
   ;;
   *)
     # Developer environments, etc.
