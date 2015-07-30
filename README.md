@@ -136,6 +136,10 @@ with their default values, if any:
 - `ZOOKEEPER_PORT=2181`
 
   Used in constructing Kafka's `zookeeper.connect` setting.
+- `ZOOKEEPER_CONNECTION_STRING=<comma separated string of host:port pairs>`
+
+  Set a string with host:port pairs for connecting to a ZooKeeper Cluster. This
+  setting overrides ZOOKEEPER_IP and ZOOKEEPER_PORT.
 - `ZOOKEEPER_CHROOT`, ex: `/v0_8_1`
 
   ZooKeeper root path used in constructing Kafka's `zookeeper.connect` setting.
