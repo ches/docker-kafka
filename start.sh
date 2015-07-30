@@ -7,9 +7,12 @@
 
 IP=$(cat /etc/hosts | head -n1 | awk '{print $1}')
 
+# Concatenate the IP:PORT for ZooKeeper to allow setting a full connection
+# string with multiple ZooKeeper hosts
+[ -n "$ZOOKEEPER_CONNECTION_STRING" ] && ZOOKEEPER_CONNECTION_STRING"=${ZOOKEEPER_IP}:${ZOOKEEPER_PORT:-2181}"
+
 cat /kafka/config/server.properties.template | sed \
-  -e "s|{{ZOOKEEPER_IP}}|${ZOOKEEPER_IP}|g" \
-  -e "s|{{ZOOKEEPER_PORT}}|${ZOOKEEPER_PORT:-2181}|g" \
+  -e "s|{{ZOOKEEPER_CONNECTION_STRING}}|${ZOOKEEPER_CONNECTION_STRING}|g" \
   -e "s|{{ZOOKEEPER_CHROOT}}|${ZOOKEEPER_CHROOT:-}|g" \
   -e "s|{{KAFKA_BROKER_ID}}|${KAFKA_BROKER_ID:-0}|g" \
   -e "s|{{KAFKA_ADVERTISED_HOST_NAME}}|${KAFKA_ADVERTISED_HOST_NAME:-$IP}|g" \
