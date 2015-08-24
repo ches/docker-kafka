@@ -115,13 +115,20 @@ with their default values, if any:
   library. This setting should reflect the address at which producers can reach
   the broker on the network, i.e. if you build a cluster consisting of multiple
   physical Docker hosts, you will need to set this to the hostname of the Docker
-  *host's* interface where you forward the container `PORT`.
+  *host's* interface where you forward the container `KAFKA_PORT`.
 - `KAFKA_ADVERTISED_PORT=9092`
 
   As above, for the port part of the advertised address. Maps to Kafka's
   `advertised.port` setting. If you run multiple broker containers on a single
   Docker host and need them to be accessible externally, this should be set to
   the port that you forward to on the Docker host.
+- `JAVA_RMI_SERVER_HOSTNAME=$KAFKA_ADVERTISED_HOST_NAME`
+
+  Maps to the `java.rmi.server.hostname` JVM property, which is used to bind the
+  interface that will accept remote JMX connections. Like
+  `KAFKA_ADVERTISED_HOST_NAME`, it may be necessary to set this to a reachable
+  address of *the Docker host* if you wish to connect a JMX client from outside
+  of Docker.
 - `ZOOKEEPER_IP=<taken from linked "zookeeper" container, if available>`
 
   **Required** if no container is linked with the alias "zookeeper" and
@@ -139,6 +146,42 @@ with their default values, if any:
   will create the path in ZK automatically; with earlier versions, you must
   ensure it is created before starting brokers.
 
+JMX
+---
+
+Remote JMX access can be a bit of a pain to set up. The start script for this
+container tries to make it as painless as possible, but it's important to
+understand that if you want to connect a client like VisualVM from outside other
+Docker containers (e.g. directly from your host OS in development), then you'll
+need to configure RMI to be addressed *as the Docker host IP or hostname*. If
+you have set `KAFKA_ADVERTISED_HOST_NAME`, that value will be used and is
+probably what you want. If not (you're only using other containers to talk to
+Kafka brokers) or you need to override it for some reason, then you can instead
+set `JAVA_RMI_SERVER_HOSTNAME`.
+
+For example in practice, if your Docker host is VirtualBox run by Docker
+Machine, a `run` command like this should allow you to connect VisualVM from
+your host OS to `$(docker-machine ip):7203`:
+
+    $ docker run -d --name kafka -p 7203:7203 \
+        --link zookeeper:zookeeper \
+        --env JAVA_RMI_SERVER_HOSTNAME=$(docker-machine ip) \
+        ches/kafka
+
+Note that it is fussy about port as well---it may not work if the same port
+number is not used within the container and on the host (any advice for
+workarounds is welcome).
+
+Finally, please note that by default remote JMX has authentication and SSL
+turned off (these settings are taken from Kafka's own default start scripts). If
+you expose the JMX hostname/port from the Docker host in a production
+environment, you should make make certain that access is locked down
+appropriately with firewall rules or similar. A more advisable setup in a Docker
+setting would be to run a metrics collector in another container, and link it to
+the Kafka container(s).
+
+If you need finer-grained configuration, you can totally control the relevant
+Java system properties by setting `KAFKA_JMX_OPTS` yourself---see `start.sh`.
 
 [Docker]: http://www.docker.io
 [Kafka]: http://kafka.apache.org
