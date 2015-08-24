@@ -5,20 +5,20 @@ This repository holds a build definition and supporting files for building a
 [Docker] image to run [Kafka] in containers. It is published as an Automated
 Build [on the Docker registry], as `ches/kafka`.
 
-Configuration is parameterized, enabling a Kafka cluster to be run from multiple
-container instances.
+This build intends to provide an operator-friendly Kafka deployment suitable for
+usage in a production Docker environment:
 
-### Fork Note
+  - It runs one service, no bundled ZooKeeper (for more convenient development,
+    use [Docker Compose]!).
+  - Configuration is parameterized, enabling a Kafka cluster to be run from
+    multiple container instances.
+  - Kafka data and logs can be handled outside the container(s) using volumes.
+  - JMX is exposed, for Kafka and JVM metrics visibility.
 
-This image/repo was forked from [relateiq/kafka]. The changes are:
+If you find any shortcomings with the build regarding operability, pull requests
+or feedback via GitHub issues are welcomed.
 
-- Change the Kafka binary source to an official Apache artifact. RelateIQ's was
-  on a private S3 bucket, and this opaqueness is not suitable for a
-  publicly-shared image for reasons of trust.
-- Changes described in [this pull request](https://github.com/relateiq/docker-kafka/pull/4).
-
-If these differences resolve in time, I will deprecate this build repo but
-leave existing published images on the registry.
+[Docker Compose]: https://docs.docker.com/compose/
 
 Usage Quick Start
 -----------------
@@ -35,8 +35,7 @@ $ ZK_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' zookeeper)
 $ KAFKA_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' kafka)
 
 $ docker run --rm ches/kafka \
->   kafka-topics.sh --create --topic test \
->     --replication-factor 1 --partitions 1 --zookeeper $ZK_IP:2181
+>   kafka-topics.sh --create --topic test --replication-factor 1 --partitions 1 --zookeeper $ZK_IP:2181
 Created topic "test".
 
 # In separate terminals:
@@ -182,6 +181,23 @@ the Kafka container(s).
 
 If you need finer-grained configuration, you can totally control the relevant
 Java system properties by setting `KAFKA_JMX_OPTS` yourself---see `start.sh`.
+
+Fork Legacy
+-----------
+
+This image/repo was originally forked from [relateiq/kafka]. My original
+motivations for forking were:
+
+- Change the Kafka binary source to an official Apache artifact. RelateIQ's was
+  on a private S3 bucket, and this opaqueness is not suitable for a
+  publicly-shared image for reasons of trust.
+- Changes described in [this pull request](https://github.com/relateiq/docker-kafka/pull/4).
+
+After a period of unresponsiveness from upstream on pull requests and my repo
+tallying far more downloads on Docker Hub, I have made further updates and
+changes with the expectation of maintaining independently from here on. This
+project's changelog file describes these in detail.
+
 
 [Docker]: http://www.docker.io
 [Kafka]: http://kafka.apache.org
