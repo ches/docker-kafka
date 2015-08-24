@@ -11,7 +11,7 @@ IP=$(cat /etc/hosts | head -n1 | awk '{print $1}')
 # string with multiple ZooKeeper hosts
 [ -n "$ZOOKEEPER_CONNECTION_STRING" ] && ZOOKEEPER_CONNECTION_STRING"=${ZOOKEEPER_IP}:${ZOOKEEPER_PORT:-2181}"
 
-cat /kafka/config/server.properties${EXTENSION} | sed \
+cat /kafka/config/server.properties.template | sed \
   -e "s|{{ZOOKEEPER_CONNECTION_STRING}}|${ZOOKEEPER_CONNECTION_STRING}|g" \
   -e "s|{{ZOOKEEPER_CHROOT}}|${ZOOKEEPER_CHROOT:-}|g" \
   -e "s|{{KAFKA_BROKER_ID}}|${KAFKA_BROKER_ID:-0}|g" \
