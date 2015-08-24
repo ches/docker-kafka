@@ -84,11 +84,11 @@ boot2docker, substitute the value of `boot2docker ip` below.
 $ mkdir -p kafka-ex/{data,logs} && cd kafka-ex
 $ docker run -d --name zookeeper --publish 2181:2181 jplock/zookeeper:3.4.6
 $ docker run -d \
-    --hostname localhost
+    --hostname localhost \
     --name kafka \
     --volume ./data:/data --volume ./logs:/logs \
     --publish 9092:9092 --publish 7203:7203 \
-    --env EXPOSED_HOST=127.0.0.1 --env ZOOKEEPER_IP=127.0.0.1 \
+    --env KAFKA_ADVERTISED_HOST_NAME=127.0.0.1 --env ZOOKEEPER_IP=127.0.0.1 \
     ches/kafka
 ```
 
@@ -99,16 +99,16 @@ Some parameters of Kafka configuration can be set through environment variables
 when running the container (`docker run -e VAR=value`). These are shown here
 with their default values, if any:
 
-- `BROKER_ID=0`
+- `KAFKA_BROKER_ID=0`
 
   Maps to Kafka's `broker.id` setting. Must be a unique integer for each broker
   in a cluster.
-- `PORT=9092`
+- `KAFKA_PORT=9092`
 
   Maps to Kafka's `port` setting. The port that the broker service listens on.
   You will need to explicitly publish a new port from container instances if you
   change this.
-- `EXPOSED_HOST=<container's IP within docker0's subnet>`
+- `KAFKA_ADVERTISED_HOST_NAME=<container's IP within docker0's subnet>`
 
   Maps to Kafka's `advertised.host.name` setting. Kafka brokers gossip the list
   of brokers in the cluster to relieve producers from depending on a ZooKeeper
@@ -116,7 +116,7 @@ with their default values, if any:
   the broker on the network, i.e. if you build a cluster consisting of multiple
   physical Docker hosts, you will need to set this to the hostname of the Docker
   *host's* interface where you forward the container `PORT`.
-- `EXPOSED_PORT=9092`
+- `KAFKA_ADVERTISED_PORT=9092`
 
   As above, for the port part of the advertised address. Maps to Kafka's
   `advertised.port` setting. If you run multiple broker containers on a single
@@ -130,14 +130,14 @@ with their default values, if any:
 - `ZOOKEEPER_PORT=2181`
 
   Used in constructing Kafka's `zookeeper.connect` setting.
-- `CHROOT`, ex: `/v0_8_1`
+- `ZOOKEEPER_CHROOT`, ex: `/v0_8_1`
 
   ZooKeeper root path used in constructing Kafka's `zookeeper.connect` setting.
   This is blank by default, which means Kafka will use the ZK `/`. You should
   set this if the ZK instance/cluster is shared by other services, or to
-  accommodate Kafka upgrades that change schema. However, as of 0.8.1.1 Kafka
-  will *not* create the path in ZK automatically, you must ensure it exists
-  before starting brokers.
+  accommodate Kafka upgrades that change schema. Starting in Kafka 0.8.2, it
+  will create the path in ZK automatically; with earlier versions, you must
+  ensure it is created before starting brokers.
 
 
 [Docker]: http://www.docker.io
