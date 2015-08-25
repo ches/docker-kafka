@@ -1,3 +1,8 @@
+## latest / 0.8.2.1-1 - Unreleased
+
+- Allow more flexible configuration of ZooKeeper connection string so that a ZK
+  cluster can be used. ([androa], #4)
+
 ## 0.8.2.1 - 24 August, 2015
 
 - Updated to Kafka 0.8.2.1
@@ -21,3 +26,5 @@
 
 Initial build with Kafka 0.8.1.1 from official binary distribution.
 
+
+[androa]: https://github.com/androa
