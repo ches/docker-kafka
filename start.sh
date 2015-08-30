@@ -9,7 +9,7 @@ IP=$(cat /etc/hosts | head -n1 | awk '{print $1}')
 
 # Concatenate the IP:PORT for ZooKeeper to allow setting a full connection
 # string with multiple ZooKeeper hosts
-[ -n "$ZOOKEEPER_CONNECTION_STRING" ] && ZOOKEEPER_CONNECTION_STRING"=${ZOOKEEPER_IP}:${ZOOKEEPER_PORT:-2181}"
+[ -z "$ZOOKEEPER_CONNECTION_STRING" ] && ZOOKEEPER_CONNECTION_STRING="${ZOOKEEPER_IP}:${ZOOKEEPER_PORT:-2181}"
 
 cat /kafka/config/server.properties.template | sed \
   -e "s|{{ZOOKEEPER_CONNECTION_STRING}}|${ZOOKEEPER_CONNECTION_STRING}|g" \
