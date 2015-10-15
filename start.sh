@@ -18,6 +18,7 @@ cat /kafka/config/server.properties.template | sed \
   -e "s|{{KAFKA_ADVERTISED_HOST_NAME}}|${KAFKA_ADVERTISED_HOST_NAME:-$IP}|g" \
   -e "s|{{KAFKA_PORT}}|${KAFKA_PORT:-9092}|g" \
   -e "s|{{KAFKA_ADVERTISED_PORT}}|${KAFKA_ADVERTISED_PORT:-9092}|g" \
+  -e "s|{{KAFKA_DELETE_TOPIC_ENABLE}}|${KAFKA_DELETE_TOPIC_ENABLE:-false}|g" \
    > /kafka/config/server.properties
 
 # Kafka's built-in start scripts set the first three system properties here, but

@@ -29,6 +29,9 @@ default.replication.factor=1
 # may not be what you want.
 advertised.host.name={{KAFKA_ADVERTISED_HOST_NAME}}
 
+# Enable topic deletion
+delete.topic.enable={{KAFKA_DELETE_TOPIC_ENABLE}}
+
 ############################# Socket Server Settings #############################
 
 # The port the socket server listens on
