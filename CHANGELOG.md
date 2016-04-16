@@ -1,5 +1,9 @@
 ## latest - Unreleased
 
+## 0.9.0.1 - 17 April, 2016
+
+- Updated to Kafka 0.9.0.1
+
 ## 0.9.0.0 - 17 April, 2016
 
 - Updated to Kafka 0.9.0.0. Switched to Scala 2.11 builds as now recommended by
