@@ -10,7 +10,7 @@ FROM netflixoss/java:7
 MAINTAINER Ches Martin <ches@whiskeyandgrits.net>
 
 # The Scala 2.10 build is currently recommended by the project.
-ENV KAFKA_VERSION=0.8.2.1 KAFKA_SCALA_VERSION=2.10 JMX_PORT=7203
+ENV KAFKA_VERSION=0.8.2.2 KAFKA_SCALA_VERSION=2.10 JMX_PORT=7203
 ENV KAFKA_RELEASE_ARCHIVE kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz
 
 RUN mkdir /kafka /data /logs
