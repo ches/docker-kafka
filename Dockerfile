@@ -6,11 +6,11 @@
 # major Java projects test and recommend Oracle Java for production for optimal
 # performance.
 
-FROM netflixoss/java:7
+FROM netflixoss/java:8
 MAINTAINER Ches Martin <ches@whiskeyandgrits.net>
 
-# The Scala 2.10 build is currently recommended by the project.
-ENV KAFKA_VERSION=0.9.0.1 KAFKA_SCALA_VERSION=2.11 JMX_PORT=7203
+# The Scala 2.11 build is currently recommended by the project.
+ENV KAFKA_VERSION=0.10.0.0 KAFKA_SCALA_VERSION=2.11 JMX_PORT=7203
 ENV KAFKA_RELEASE_ARCHIVE kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz
 
 RUN mkdir /kafka /data /logs
