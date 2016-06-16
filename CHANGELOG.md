@@ -1,6 +1,6 @@
 ## latest - Unreleased
 
-## 0.10.0.0 - 1 June, 2016
+## 0.10.0.0 - 16 June, 2016
 
 - Updated to Kafka 0.10.0.0
 - Updated to Java 8
