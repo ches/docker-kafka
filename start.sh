@@ -5,7 +5,7 @@
 [ -n "$ZOOKEEPER_PORT_2181_TCP_ADDR" ] && ZOOKEEPER_IP=$ZOOKEEPER_PORT_2181_TCP_ADDR
 [ -n "$ZOOKEEPER_PORT_2181_TCP_PORT" ] && ZOOKEEPER_PORT=$ZOOKEEPER_PORT_2181_TCP_PORT
 
-IP=$(grep ${HOSTNAME} /etc/hosts | awk '{print $1}')
+IP=$(grep "\s${HOSTNAME}$" /etc/hosts | head -n 1 | awk '{print $1}')
 
 # Concatenate the IP:PORT for ZooKeeper to allow setting a full connection
 # string with multiple ZooKeeper hosts
