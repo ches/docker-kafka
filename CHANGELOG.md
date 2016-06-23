@@ -1,5 +1,8 @@
 ## latest - Unreleased
 
+- Make IP detection from `/etc/hosts` in the start script resilient to multiple
+  or partial matches. ([Jamstah], #18)
+
 ## 0.10.0.0 - 16 June, 2016
 
 - Updated to Kafka 0.10.0.0
@@ -48,3 +51,4 @@ Initial build with Kafka 0.8.1.1 from official binary distribution.
 
 [androa]: https://github.com/androa
 [davidgiesberg]: https://github.com/davidgiesberg
+[Jamstah]: https://github.com/Jamstah
