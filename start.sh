@@ -19,6 +19,10 @@ cat /kafka/config/server.properties.template | sed \
   -e "s|{{KAFKA_PORT}}|${KAFKA_PORT:-9092}|g" \
   -e "s|{{KAFKA_ADVERTISED_PORT}}|${KAFKA_ADVERTISED_PORT:-9092}|g" \
   -e "s|{{KAFKA_DELETE_TOPIC_ENABLE}}|${KAFKA_DELETE_TOPIC_ENABLE:-false}|g" \
+  -e "s|{{ZOOKEEPER_CONNECTION_TIMEOUT_MS}}|${ZOOKEEPER_CONNECTION_TIMEOUT_MS:-10000}|g" \
+  -e "s|{{ZOOKEEPER_SESSION_TIMEOUT_MS}}|${ZOOKEEPER_SESSION_TIMEOUT_MS:-10000}|g" \
+  -e "s|{{GROUP_MAX_SESSION_TIMEOUT_MS}}|${GROUP_MAX_SESSION_TIMEOUT_MS:-300000}|g" \
+  -e "s|{{MAX_POLL_RECORDS}}|${MAX_POLL_RECORDS:-2147483647}|g" \
    > /kafka/config/server.properties
 
 # Kafka's built-in start scripts set the first three system properties here, but
