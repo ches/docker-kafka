@@ -70,6 +70,5 @@ zookeeper.connection.timeout.ms={{ZOOKEEPER_CONNECTION_TIMEOUT_MS}}
 controlled.shutdown.enable=true
 zookeeper.session.timeout.ms={{ZOOKEEPER_SESSION_TIMEOUT_MS}}
 group.max.session.timeout.ms={{GROUP_MAX_SESSION_TIMEOUT_MS}}
-max.poll.records={{MAX_POLL_RECORDS}}
 
 # vim:set filetype=jproperties
