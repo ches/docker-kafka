@@ -67,8 +67,10 @@ log.retention.hours=168
 # root directory for all kafka znodes.
 zookeeper.connect={{ZOOKEEPER_CONNECTION_STRING}}{{ZOOKEEPER_CHROOT}}
 zookeeper.connection.timeout.ms={{ZOOKEEPER_CONNECTION_TIMEOUT_MS}}
-controlled.shutdown.enable=true
 zookeeper.session.timeout.ms={{ZOOKEEPER_SESSION_TIMEOUT_MS}}
+
+############################# Additional Broker Settings #######################
+controlled.shutdown.enable=true
 group.max.session.timeout.ms={{GROUP_MAX_SESSION_TIMEOUT_MS}}
 
 # vim:set filetype=jproperties
