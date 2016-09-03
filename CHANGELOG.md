@@ -1,7 +1,13 @@
 ## latest - Unreleased
 
+No changes yet.
+
+## 0.10.0.1 - 3 September, 2016
+
+- Update to Kafka 0.10.0.1
 - Make IP detection from `/etc/hosts` in the start script resilient to multiple
   or partial matches. ([Jamstah], #18)
+- Add configurability for several timeout values. ([closedLoop], #20)
 
 ## 0.10.0.0 - 16 June, 2016
 
@@ -50,5 +56,6 @@ Initial build with Kafka 0.8.1.1 from official binary distribution.
 
 
 [androa]: https://github.com/androa
+[closedLoop]: https://github.com/closedLoop
 [davidgiesberg]: https://github.com/davidgiesberg
 [Jamstah]: https://github.com/Jamstah
