@@ -131,15 +131,15 @@ with their default values, if any:
 - `ZOOKEEPER_IP=<taken from linked "zookeeper" container, if available>`
 
   **Required** if no container is linked with the alias "zookeeper" and
-  publishing port 2181. Used in constructing Kafka's `zookeeper.connect`
-  setting.
+  publishing port 2181, or not using `ZOOKEEPER_CONNECTION_STRING` instead. Used
+  in constructing Kafka's `zookeeper.connect` setting.
 - `ZOOKEEPER_PORT=2181`
 
   Used in constructing Kafka's `zookeeper.connect` setting.
 - `ZOOKEEPER_CONNECTION_STRING=<comma separated string of host:port pairs>`
 
   Set a string with host:port pairs for connecting to a ZooKeeper Cluster. This
-  setting overrides ZOOKEEPER_IP and ZOOKEEPER_PORT.
+  setting overrides `ZOOKEEPER_IP` and `ZOOKEEPER_PORT`.
 - `ZOOKEEPER_CHROOT`, ex: `/v0_8_1`
 
   ZooKeeper root path used in constructing Kafka's `zookeeper.connect` setting.
@@ -164,11 +164,11 @@ set `JAVA_RMI_SERVER_HOSTNAME`.
 
 For example in practice, if your Docker host is VirtualBox run by Docker
 Machine, a `run` command like this should allow you to connect VisualVM from
-your host OS to `$(docker-machine ip):7203`:
+your host OS to `$(docker-machine ip docker-vm):7203`:
 
     $ docker run -d --name kafka -p 7203:7203 \
         --link zookeeper:zookeeper \
-        --env JAVA_RMI_SERVER_HOSTNAME=$(docker-machine ip) \
+        --env JAVA_RMI_SERVER_HOSTNAME=$(docker-machine ip docker-vm) \
         ches/kafka
 
 Note that it is fussy about port as well---it may not work if the same port
