@@ -24,6 +24,8 @@ cat /kafka/config/server.properties.template | sed \
   -e "s|{{GROUP_MAX_SESSION_TIMEOUT_MS}}|${GROUP_MAX_SESSION_TIMEOUT_MS:-300000}|g" \
    > /kafka/config/server.properties
 
+echo $KAFKA_SERVER_CONFIG | tr ',' '\n' >> /kafka/config/server.properties
+
 # Kafka's built-in start scripts set the first three system properties here, but
 # we add two more to make remote JMX easier/possible to access in a Docker
 # environment:
