@@ -2,6 +2,10 @@
 
 No changes yet.
 
+## 0.10.1.0 - 27 October, 2016
+
+- Update to Kafka 0.10.1.0 ([xrl], #25)
+
 ## 0.10.0.1 - 3 September, 2016
 
 - Update to Kafka 0.10.0.1
@@ -59,3 +63,4 @@ Initial build with Kafka 0.8.1.1 from official binary distribution.
 [closedLoop]: https://github.com/closedLoop
 [davidgiesberg]: https://github.com/davidgiesberg
 [Jamstah]: https://github.com/Jamstah
+[xrl]: https://github.com/xrl
