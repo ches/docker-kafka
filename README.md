@@ -121,6 +121,10 @@ with their default values, if any:
   `advertised.port` setting. If you run multiple broker containers on a single
   Docker host and need them to be accessible externally, this should be set to
   the port that you forward to on the Docker host.
+- `KAFKA_DEFAULT_REPLICATION_FACTOR=1`
+
+  Maps to Kafka's `default.replication.factor` setting. The default replication
+  factor for automatically created topics.
 - `JAVA_RMI_SERVER_HOSTNAME=$KAFKA_ADVERTISED_HOST_NAME`
 
   Maps to the `java.rmi.server.hostname` JVM property, which is used to bind the
