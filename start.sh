@@ -16,12 +16,12 @@ IP=$(hostname -i)
 [ -z "$KAFKA_BROKER_ID" ] && KAFKA_BROKER_ID=$(echo $HOSTNAME | sed 's/.*-\([0-9]\+\)$/\1/')
 
 cat /kafka/config/server.properties.template | sed \
-  -e "s|{{ZOOKEEPER_CONNECTION_STRING}}|${ZOOKEEPER_CONNECTION_STRING}|g" \
+  -e "s|{{GROUP_MAX_SESSION_TIMEOUT_MS}}|${GROUP_MAX_SESSION_TIMEOUT_MS:-300000}|g" \
   -e "s|{{KAFKA_BROKER_ID}}|${KAFKA_BROKER_ID:-0}|g" \
   -e "s|{{KAFKA_DELETE_TOPIC_ENABLE}}|${KAFKA_DELETE_TOPIC_ENABLE:-false}|g" \
   -e "s|{{LOG_FLUSH_SCHEDULER_INTERVAL_MS}}|${LOG_FLUSH_SCHEDULER_INTERVAL_MS:-9223372036854775807}|g" \
   -e "s|{{LOG_RETENTION_HOURS}}|${LOG_RETENTION_HOURS:-168}|g" \
-  -e "s|{{GROUP_MAX_SESSION_TIMEOUT_MS}}|${GROUP_MAX_SESSION_TIMEOUT_MS:-300000}|g" \
+  -e "s|{{ZOOKEEPER_CONNECTION_STRING}}|${ZOOKEEPER_CONNECTION_STRING}|g" \
   -e "s|{{ZOOKEEPER_CONNECTION_TIMEOUT_MS}}|${ZOOKEEPER_CONNECTION_TIMEOUT_MS:-10000}|g" \
   -e "s|{{ZOOKEEPER_SESSION_TIMEOUT_MS}}|${ZOOKEEPER_SESSION_TIMEOUT_MS:-10000}|g" \
    > /kafka/config/server.properties
@@ -43,7 +43,7 @@ if [ -z $KAFKA_JMX_OPTS ]; then
     KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote=true"
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.authenticate=false"
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.ssl=false"
-    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT"
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=${KAFKA_JMX_PORT:-7203}"
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.net.preferIPv4Stack=true"
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${JAVA_RMI_SERVER_HOSTNAME:-$HOSTNAME} "
     export KAFKA_JMX_OPTS
