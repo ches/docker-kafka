@@ -49,5 +49,8 @@ if [ -z $KAFKA_JMX_OPTS ]; then
     export KAFKA_JMX_OPTS
 fi
 
+# awful no-good hack for dealing with mounted FS
+mkdir /data/data /logs/logs
+
 echo "Starting kafka"
 exec /kafka/bin/kafka-server-start.sh /kafka/config/server.properties
