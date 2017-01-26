@@ -76,7 +76,7 @@ spec:
                 key: jvm.heap
         - name: KAFKA_DELETE_TOPIC_ENABLE
           value: "true"
-        - name: LOG_RETENTION_HOURS
+        - name: KAFKA_LOG_RETENTION_HOURS
           # 5 years
           value: "43800"
         # command:

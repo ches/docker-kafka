@@ -89,9 +89,12 @@ num.recovery.threads.per.data.dir={{KAFKA_RECOVERY_THREADS_PER_DATA_DIR}}
 
 # The frequency in ms that the log flusher checks whether any log needs to be flushed to disk
 # also doubles as log.flush.interval.ms (the maximum time in ms that a message in any topic is kept in memory before flushed to disk)
-log.flush.scheduler.interval.ms={{LOG_FLUSH_SCHEDULER_INTERVAL_MS}}
+log.flush.scheduler.interval.ms={{KAFKA_LOG_FLUSH_SCHEDULER_INTERVAL_MS}}
 
 ############################# Log Retention Policy #############################
+
+# Default number of replicas for new topics
+default.replication.factor={{KAFKA_DEFAULT_REPLICATION_FACTOR}}
 
 # The following configurations control the disposal of log segments. The policy can
 # be set to delete segments after a period of time, or after a given size has accumulated.
@@ -99,7 +102,7 @@ log.flush.scheduler.interval.ms={{LOG_FLUSH_SCHEDULER_INTERVAL_MS}}
 # from the end of the log.
 
 # The minimum age of a log file to be eligible for deletion
-log.retention.hours={{LOG_RETENTION_HOURS}}
+log.retention.hours={{KAFKA_LOG_RETENTION_HOURS}}
 
 # A size-based retention policy for logs. Segments are pruned from the log as long as the remaining
 # segments don't drop below log.retention.bytes.
