@@ -15,15 +15,21 @@ IP=$(hostname -i)
 # expects $HOSTNAME in the format *-DIGIT
 [ -z "$KAFKA_BROKER_ID" ] && KAFKA_BROKER_ID=$(echo $HOSTNAME | sed 's/.*-\([0-9]\+\)$/\1/')
 
+# I don't like to use NET=host for all my containers, so this is some bending-over-backwards work
+[ -z "$KAFKA_ADVERTISED_HOST_NAME" ] && KAFKA_ADVERTISED_HOST_NAME=$(hostname -f)
+[ -z "$KAFKA_LISTENER_HOST_NAME"   ] && KAFKA_LISTENER_HOST_NAME=$(hostname -i)
+
 cat /kafka/config/server.properties.template | sed \
   -e "s|{{GROUP_MAX_SESSION_TIMEOUT_MS}}|${GROUP_MAX_SESSION_TIMEOUT_MS:-300000}|g" \
+  -e "s|{{KAFKA_ADVERTISED_HOST_NAME}}|${KAFKA_ADVERTISED_HOST_NAME}|g" \
   -e "s|{{KAFKA_BROKER_ID}}|${KAFKA_BROKER_ID:-0}|g" \
   -e "s|{{KAFKA_DEFAULT_REPLICATION_FACTOR}}|${KAFKA_DEFAULT_REPLICATION_FACTOR:-1}|g" \
   -e "s|{{KAFKA_DELETE_TOPIC_ENABLE}}|${KAFKA_DELETE_TOPIC_ENABLE:-false}|g" \
-  -e "s|{{KAFKA_NUM_PARTITIONS}}|${KAFKA_NUM_PARTITIONS:-1}|g" \
-  -e "s|{{KAFKA_RECOVERY_THREADS_PER_DATA_DIR}}|${KAFKA_RECOVERY_THREADS_PER_DATA_DIR:-1}|g" \
+  -e "s|{{KAFKA_LISTENER_HOST_NAME}}|${KAFKA_LISTENER_HOST_NAME}|g" \
   -e "s|{{KAFKA_LOG_FLUSH_SCHEDULER_INTERVAL_MS}}|${KAFKA_LOG_FLUSH_SCHEDULER_INTERVAL_MS:-9223372036854775807}|g" \
   -e "s|{{KAFKA_LOG_RETENTION_HOURS}}|${KAFKA_LOG_RETENTION_HOURS:-168}|g" \
+  -e "s|{{KAFKA_NUM_PARTITIONS}}|${KAFKA_NUM_PARTITIONS:-1}|g" \
+  -e "s|{{KAFKA_RECOVERY_THREADS_PER_DATA_DIR}}|${KAFKA_RECOVERY_THREADS_PER_DATA_DIR:-1}|g" \
   -e "s|{{ZOOKEEPER_CONNECTION_STRING}}|${ZOOKEEPER_CONNECTION_STRING}|g" \
   -e "s|{{ZOOKEEPER_CONNECTION_TIMEOUT_MS}}|${ZOOKEEPER_CONNECTION_TIMEOUT_MS:-10000}|g" \
   -e "s|{{ZOOKEEPER_SESSION_TIMEOUT_MS}}|${ZOOKEEPER_SESSION_TIMEOUT_MS:-10000}|g" \
@@ -56,4 +62,4 @@ fi
 mkdir -p /data/data /logs/logs
 
 echo "Starting kafka"
-exec /kafka/bin/kafka-server-start.sh /kafka/config/server.properties
+exec /kafka/bin/kafka-server-start.sh /kafka/config/server.properties $@

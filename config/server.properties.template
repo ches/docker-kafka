@@ -31,14 +31,14 @@ delete.topic.enable={{KAFKA_DELETE_TOPIC_ENABLE}}
 #     listeners = security_protocol://host_name:port
 #   EXAMPLE:
 #     listeners = PLAINTEXT://your.host.name:9092
-#listeners=PLAINTEXT://:9092
-# TODO: how to expose this thought docker ENV?
+listeners=PLAINTEXT://{{KAFKA_LISTENER_HOST_NAME}}:9092
+# TODO: how to expose this through docker ENV?
 
 # Hostname and port the broker will advertise to producers and consumers. If not set,
 # it uses the value for "listeners" if configured.  Otherwise, it will use the value
 # returned from java.net.InetAddress.getCanonicalHostName().
-#advertised.listeners=PLAINTEXT://your.host.name:9092
-# TODO: how to expose this thought docker ENV?
+advertised.listeners=PLAINTEXT://{{KAFKA_ADVERTISED_HOST_NAME}}:9092
+# TODO: how to expose this through docker ENV?
 
 # The number of threads handling network requests
 num.network.threads=3
