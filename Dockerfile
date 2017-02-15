@@ -1,17 +1,28 @@
-# Builds an image for Apache Kafka 0.8.1.1 from binary distribution.
-#
-# The netflixoss/java base image runs Oracle Java 7 installed atop the
+# The image runs Oracle Java 8 installed atop the
 # ubuntu:trusty (14.04) official image. Docker's official java images are
 # OpenJDK-only currently, and the Kafka project, Confluent, and most other
 # major Java projects test and recommend Oracle Java for production for optimal
 # performance.
 
-FROM netflixoss/java:8
+FROM ubuntu:trusty
 MAINTAINER Ches Martin <ches@whiskeyandgrits.net>
 
+# Install Java.
+# https://github.com/dockerfile/java/blob/master/oracle-java8/Dockerfile
+RUN \
+  apt-get update && apt-get install -y software-properties-common && \
+  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+  add-apt-repository -y ppa:webupd8team/java && \
+  apt-get update && \
+  apt-get install -y oracle-java8-installer && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/oracle-jdk8-installer
+
 # The Scala 2.11 build is currently recommended by the project.
-ENV KAFKA_VERSION=0.10.1.0 KAFKA_SCALA_VERSION=2.11 JMX_PORT=7203
-ENV KAFKA_RELEASE_ARCHIVE kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz
+ENV KAFKA_VERSION=0.10.1.1 \
+	KAFKA_SCALA_VERSION=2.11 \
+	KAFKA_JMX_PORT=7203
+ENV KAFKA_RELEASE_ARCHIVE="kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz"
 
 RUN mkdir /kafka /data /logs
 
@@ -45,8 +56,22 @@ USER kafka
 ENV PATH /kafka/bin:$PATH
 WORKDIR /kafka
 
+ENV GROUP_MAX_SESSION_TIMEOUT_MS="300000" \
+  JAVA_RMI_SERVER_HOSTNAME="" \
+  KAFKA_BROKER_ID="" \
+  KAFKA_DEFAULT_REPLICATION_FACTOR="1" \
+  KAFKA_DELETE_TOPIC_ENABLE="false" \
+  KAFKA_LOG4J_OPTS="" \
+  KAFKA_LOG_FLUSH_SCHEDULER_INTERVAL_MS="9223372036854775807" \
+  KAFKA_LOG_RETENTION_HOURS="168" \
+  KAFKA_NUM_PARTITIONS="1" \
+  KAFKA_RECOVERY_THREADS_PER_DATA_DIR="1" \
+  ZOOKEEPER_CONNECTION_STRING="localhost:2181" \
+  ZOOKEEPER_CONNECTION_TIMEOUT_MS="10000" \
+  ZOOKEEPER_SESSION_TIMEOUT_MS="10000"
+
 # broker, jmx
-EXPOSE 9092 ${JMX_PORT}
+EXPOSE 9092 ${KAFKA_JMX_PORT}
 VOLUME [ "/data", "/logs" ]
 
 CMD ["/start.sh"]

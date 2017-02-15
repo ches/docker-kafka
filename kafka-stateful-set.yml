@@ -1,0 +1,113 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-headless
+  labels:
+    app: kafka-headless
+spec:
+  ports:
+  - port: 9092
+    name: server
+  - port: 7203
+    name: jmx
+  clusterIP: None
+  selector:
+    app: kafka
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-config
+data:
+  # ref the zk ensemble config
+  jvm.heap: "-Xmx4G -Xms4G"
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: kafka
+spec:
+  serviceName: kafka-headless
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: kafka
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
+        scheduler.alpha.kubernetes.io/affinity: >
+            {
+              "podAntiAffinity": {
+                "requiredDuringSchedulingRequiredDuringExecution": [{
+                  "labelSelector": {
+                    "matchExpressions": [{
+                      "key": "app",
+                      "operator": "In",
+                      "values": ["kafka-headless"]
+                    }]
+                  },
+                  "topologyKey": "kubernetes.io/hostname"
+                }]
+              }
+            }
+    spec:
+      containers:
+      - name: kafka
+        imagePullPolicy: Always
+        image: registry/kafka:0.10.1.1
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "4"
+        ports:
+        - containerPort: 9092
+          name: server
+        - containerPort: 7203
+          name: jmx
+        env:
+        - name: ZOOKEEPER_CONNECTION_STRING # TODO replace with zk-config map
+          value: "zk-0.zk-headless.default.svc.cluster.local:2181/kafka-prod,zk-1.zk-headless.default.svc.cluster.local:2181/kafka-prod,zk-2.zk-headless.default.svc.cluster.local:2181/kafka-prod"
+        # - name: KAFKA_BROKER_ID # Inserted by /start.sh server.properties genscript
+        #   value: "0"
+        - name: KAFKA_HEAP_OPTS
+          valueFrom:
+            configMapKeyRef:
+                name: kafka-config
+                key: jvm.heap
+        - name: KAFKA_DELETE_TOPIC_ENABLE
+          value: "true"
+        - name: KAFKA_LOG_RETENTION_HOURS
+          # 5 years
+          value: "43800"
+        # command:
+        # - sh
+        # - -c
+        # - zkGenConfig.sh && zkServer.sh start-foreground
+        # readinessProbe:
+        #   exec:
+        #     command:
+        #     - "zkOk.sh"
+        #   initialDelaySeconds: 15
+        #   timeoutSeconds: 5
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #     - "zkOk.sh"
+        #   initialDelaySeconds: 15
+        #   timeoutSeconds: 5
+        # volumeMounts:
+        # - name: datadir
+        #   mountPath: /var/lib/zookeeper
+      # securityContext:
+      #   runAsUser: 1000
+      #   fsGroup: 1000
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: datadir
+  #     annotations:
+  #       volume.alpha.kubernetes.io/storage-class: ceph
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     resources:
+  #       requests:
+  #         storage: 20Gi
