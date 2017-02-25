@@ -2,6 +2,14 @@
 
 No changes yet.
 
+## 0.10.2.0 - 25 February, 2017
+
+- Update to Kafka 0.10.2.0
+
+## 0.10.1.1 - 12 January, 2017
+
+- Update to Kafka 0.10.1.1
+
 ## 0.10.1.0 - 27 October, 2016
 
 - Update to Kafka 0.10.1.0 ([xrl], #25)
