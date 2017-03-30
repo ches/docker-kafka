@@ -159,7 +159,7 @@ with their default values, if any:
 	with which your cluster communicates with it's consumers.
 - `AUTO_CREATE_TOPICS`
 
-  Maps Kafka's `auto.create.topics.enable`. 
+  Maps Kafka's `auto.create.topics.enable`. Default is set to false.
 
 JMX
 ---
