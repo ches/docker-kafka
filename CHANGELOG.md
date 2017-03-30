@@ -2,6 +2,11 @@
 
 No changes yet.
 
+## 0.10.2.0 - 30 March, 2017
+
+- Update to Kafka 0.10.2.0
+- Support setting properties for log message and inter broker protocol version
+
 ## 0.10.1.0 - 27 October, 2016
 
 - Update to Kafka 0.10.1.0 ([xrl], #25)

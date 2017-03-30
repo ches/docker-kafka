@@ -72,5 +72,7 @@ zookeeper.session.timeout.ms={{ZOOKEEPER_SESSION_TIMEOUT_MS}}
 ############################# Additional Broker Settings #######################
 controlled.shutdown.enable=true
 group.max.session.timeout.ms={{GROUP_MAX_SESSION_TIMEOUT_MS}}
+inter.broker.protocol.version={{INTER_BROKER_PROTOCOL_VERSION}}
+log.message.format.version={{LOG_MESSAGE_FORMAT_VERSION}}
 
 # vim:set filetype=jproperties
