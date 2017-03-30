@@ -157,6 +157,9 @@ with their default values, if any:
 
   Maps Kafka's `log.message.format.version`. Specifies the protocol version
 	with which your cluster communicates with it's consumers.
+- `AUTO_CREATE_TOPICS`
+
+  Maps Kafka's `auto.create.topics.enable`. 
 
 JMX
 ---

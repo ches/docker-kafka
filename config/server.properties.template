@@ -21,7 +21,7 @@ broker.id={{KAFKA_BROKER_ID}}
 auto.leader.rebalance.enable=true
 
 # Replication
-auto.create.topics.enable=true
+auto.create.topics.enable={{AUTO_CREATE_TOPICS}}
 default.replication.factor=1
 
 # Hostname the broker will advertise to consumers. If not set, kafka will use the value returned

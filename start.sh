@@ -24,6 +24,7 @@ cat /kafka/config/server.properties.template | sed \
   -e "s|{{GROUP_MAX_SESSION_TIMEOUT_MS}}|${GROUP_MAX_SESSION_TIMEOUT_MS:-300000}|g" \
 	-e "s|{{INTER_BROKER_PROTOCOL_VERSION}}|${INTER_BROKER_PROTOCOL_VERSION:-$KAFKA_VERSION}|g" \
 	-e "s|{{LOG_MESSAGE_FORMAT_VERSION}}|${LOG_MESSAGE_FORMAT_VERSION:-$KAFKA_VERSION}|g" \
+	-e "s|{{AUTO_CREATE_TOPICS}}|${AUTO_CREATE_TOPICS:-true}|g" \
    > /kafka/config/server.properties
 
 # Kafka's built-in start scripts set the first three system properties here, but

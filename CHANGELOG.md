@@ -6,6 +6,7 @@ No changes yet.
 
 - Update to Kafka 0.10.2.0
 - Support setting properties for log message and inter broker protocol version
+- Set auto create with environment variable
 
 ## 0.10.1.0 - 27 October, 2016
 
