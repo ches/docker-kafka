@@ -3,6 +3,10 @@ Release Notes
 
 ## latest - Unreleased
 
+No changes yet.
+
+## 0.10.1.2 - 31 March, 2017
+
 - Update to Kafka 0.10.2.0 ([bgaechter], #39)
 - Switch to Scala 2.12 builds as now recommended by Kafka.
 - Change config var `GROUP_MAX_SESSION_TIMEOUT_MS` to
@@ -11,7 +15,7 @@ Release Notes
   `inter.broker.protocol.version`, and `log.message.format.version`
   ([bgaechter], #39)
 
-## 0.10.1.1 - 31 October, 2017
+## 0.10.1.1 - 31 March, 2017
 
 - Update to Kafka 0.10.1.1
 - Allow configuration of `default.replication.factor` ([sjking], #32)
