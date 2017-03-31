@@ -5,7 +5,7 @@ Release Notes
 
 No changes yet.
 
-## 0.10.1.2 - 31 March, 2017
+## 0.10.2.0 - 31 March, 2017
 
 - Update to Kafka 0.10.2.0 ([bgaechter], #39)
 - Switch to Scala 2.12 builds as now recommended by Kafka.
