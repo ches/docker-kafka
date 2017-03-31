@@ -1,6 +1,14 @@
+Release Notes
+=============
+
 ## latest - Unreleased
 
 No changes yet.
+
+## 0.10.1.1 - 31 October, 2017
+
+- Updated to Kafka 0.10.1.1
+- Allow configuration of `default.replication.factor` ([sjking], #32)
 
 ## 0.10.1.0 - 27 October, 2016
 
@@ -63,4 +71,5 @@ Initial build with Kafka 0.8.1.1 from official binary distribution.
 [closedLoop]: https://github.com/closedLoop
 [davidgiesberg]: https://github.com/davidgiesberg
 [Jamstah]: https://github.com/Jamstah
+[sjking]: https://github.com/sjking
 [xrl]: https://github.com/xrl

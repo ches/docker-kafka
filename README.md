@@ -3,7 +3,7 @@ Apache Kafka on Docker
 
 This repository holds a build definition and supporting files for building a
 [Docker] image to run [Kafka] in containers. It is published as an Automated
-Build [on the Docker registry], as `ches/kafka`.
+Build [on Docker Hub], as `ches/kafka`.
 
 This build intends to provide an operator-friendly Kafka deployment suitable for
 usage in a production Docker environment:
@@ -175,7 +175,7 @@ your host OS to `$(docker-machine ip docker-vm):7203`:
         --env JAVA_RMI_SERVER_HOSTNAME=$(docker-machine ip docker-vm) \
         ches/kafka
 
-Note that it is fussy about port as well---it may not work if the same port
+Note that it is fussy about port as well—it may not work if the same port
 number is not used within the container and on the host (any advice for
 workarounds is welcome).
 
@@ -188,7 +188,7 @@ setting would be to run a metrics collector in another container, and link it to
 the Kafka container(s).
 
 If you need finer-grained configuration, you can totally control the relevant
-Java system properties by setting `KAFKA_JMX_OPTS` yourself---see `start.sh`.
+Java system properties by setting `KAFKA_JMX_OPTS` yourself—see `start.sh`.
 
 Fork Legacy
 -----------
@@ -209,7 +209,7 @@ project's changelog file describes these in detail.
 
 [Docker]: http://www.docker.io
 [Kafka]: http://kafka.apache.org
-[on the Docker registry]: https://registry.hub.docker.com/u/ches/kafka/
+[on Docker Hub]: https://hub.docker.com/r/ches/kafka/
 [relateiq/kafka]: https://github.com/relateiq/docker-kafka
 [the Kafka Quick Start]: http://kafka.apache.org/documentation.html#quickstart
 
