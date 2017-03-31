@@ -4,6 +4,7 @@ Release Notes
 ## latest - Unreleased
 
 - Update to Kafka 0.10.2.0 ([bgaechter], #39)
+- Switch to Scala 2.12 builds as now recommended by Kafka.
 - Change config var `GROUP_MAX_SESSION_TIMEOUT_MS` to
   `KAFKA_GROUP_MAX_SESSION_TIMEOUT_MS` for consistency.
 - Allow configuration of `auto.create.topics.enable`,
