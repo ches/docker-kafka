@@ -125,6 +125,18 @@ with their default values, if any:
 
   Maps to Kafka's `default.replication.factor` setting. The default replication
   factor for automatically created topics.
+- `KAFKA_AUTO_CREATE_TOPICS_ENABLE=true`
+
+  Maps to Kafka's `auto.create.topics.enable`.
+- `KAFKA_INTER_BROKER_PROTOCOL_VERSION`
+
+  Maps to Kafka's `inter.broker.protocol.version`. If you have a cluster that
+  runs brokers with different Kafka versions make sure they communicate with
+  the same protocol version.
+- `KAFKA_LOG_MESSAGE_FORMAT_VERSION`
+
+  Maps to Kafka's `log.message.format.version`. Specifies the protocol version
+  with which your cluster communicates with its consumers.
 - `JAVA_RMI_SERVER_HOSTNAME=$KAFKA_ADVERTISED_HOST_NAME`
 
   Maps to the `java.rmi.server.hostname` JVM property, which is used to bind the
@@ -152,18 +164,6 @@ with their default values, if any:
   accommodate Kafka upgrades that change schema. Starting in Kafka 0.8.2, it
   will create the path in ZK automatically; with earlier versions, you must
   ensure it is created before starting brokers.
-- `INTER_BROKER_PROTOCOL_VERSION`
-
-  Maps Kafka's `inter.broker.protocol.version`. If you have a cluster that
-	runs brokers with different Kafka versions make sure they communicate with 
-	the same protocol version.
-- `LOG_MESSAGE_FORMAT_VERSION`
-
-  Maps Kafka's `log.message.format.version`. Specifies the protocol version
-	with which your cluster communicates with it's consumers.
-- `AUTO_CREATE_TOPICS`
-
-  Maps Kafka's `auto.create.topics.enable`. Default is set to false.
 
 JMX
 ---

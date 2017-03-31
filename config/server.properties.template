@@ -21,7 +21,7 @@ broker.id={{KAFKA_BROKER_ID}}
 auto.leader.rebalance.enable=true
 
 # Replication
-auto.create.topics.enable={{AUTO_CREATE_TOPICS}}
+auto.create.topics.enable={{KAFKA_AUTO_CREATE_TOPICS_ENABLE}}
 default.replication.factor={{KAFKA_DEFAULT_REPLICATION_FACTOR}}
 
 # Hostname the broker will advertise to consumers. If not set, kafka will use the value returned
@@ -71,8 +71,8 @@ zookeeper.session.timeout.ms={{ZOOKEEPER_SESSION_TIMEOUT_MS}}
 
 ############################# Additional Broker Settings #######################
 controlled.shutdown.enable=true
-group.max.session.timeout.ms={{GROUP_MAX_SESSION_TIMEOUT_MS}}
-inter.broker.protocol.version={{INTER_BROKER_PROTOCOL_VERSION}}
-log.message.format.version={{LOG_MESSAGE_FORMAT_VERSION}}
+group.max.session.timeout.ms={{KAFKA_GROUP_MAX_SESSION_TIMEOUT_MS}}
+inter.broker.protocol.version={{KAFKA_INTER_BROKER_PROTOCOL_VERSION}}
+log.message.format.version={{KAFKA_LOG_MESSAGE_FORMAT_VERSION}}
 
 # vim:set filetype=jproperties
