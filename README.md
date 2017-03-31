@@ -125,6 +125,10 @@ with their default values, if any:
 
   Maps to Kafka's `default.replication.factor` setting. The default replication
   factor for automatically created topics.
+- `KAFKA_NUM_PARTITIONS=1`
+
+  Maps to Kafka's `num.partitions` setting. The default number of log partitions
+  per topic.
 - `KAFKA_AUTO_CREATE_TOPICS_ENABLE=true`
 
   Maps to Kafka's `auto.create.topics.enable`.
