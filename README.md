@@ -152,6 +152,18 @@ with their default values, if any:
   accommodate Kafka upgrades that change schema. Starting in Kafka 0.8.2, it
   will create the path in ZK automatically; with earlier versions, you must
   ensure it is created before starting brokers.
+- `INTER_BROKER_PROTOCOL_VERSION`
+
+  Maps Kafka's `inter.broker.protocol.version`. If you have a cluster that
+	runs brokers with different Kafka versions make sure they communicate with 
+	the same protocol version.
+- `LOG_MESSAGE_FORMAT_VERSION`
+
+  Maps Kafka's `log.message.format.version`. Specifies the protocol version
+	with which your cluster communicates with it's consumers.
+- `AUTO_CREATE_TOPICS`
+
+  Maps Kafka's `auto.create.topics.enable`. Default is set to false.
 
 JMX
 ---

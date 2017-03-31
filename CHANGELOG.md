@@ -3,7 +3,9 @@ Release Notes
 
 ## latest - Unreleased
 
-No changes yet.
+- Update to Kafka 0.10.2.0
+- Support setting properties for log message and inter broker protocol version
+- Set auto create with environment variable
 
 ## 0.10.1.1 - 31 October, 2017
 
