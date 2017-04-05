@@ -44,7 +44,7 @@ $ docker run --rm --interactive ches/kafka \
 <type some messages followed by newline>
 
 $ docker run --rm ches/kafka \
->   kafka-console-consumer.sh --topic test --from-beginning --zookeeper $ZK_IP:2181
+>   kafka-console-consumer.sh --topic test --from-beginning --zookeeper $KAFKA_IP:9092
 ```
 
 ### Volumes
