@@ -28,7 +28,7 @@ using the container as a client to run the basic producer and consumer example
 from [the Kafka Quick Start]:
 
 ```
-$ docker run -d --name zookeeper jplock/zookeeper:3.4.6
+$ docker run -d --name zookeeper zookeeper:3.4
 $ docker run -d --name kafka --link zookeeper:zookeeper ches/kafka
 
 $ ZK_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' zookeeper)
@@ -81,7 +81,7 @@ boot2docker, substitute the value of `boot2docker ip` below.
 
 ```bash
 $ mkdir -p kafka-ex/{data,logs} && cd kafka-ex
-$ docker run -d --name zookeeper --publish 2181:2181 jplock/zookeeper:3.4.6
+$ docker run -d --name zookeeper --publish 2181:2181 zookeeper:3.4
 $ docker run -d \
     --hostname localhost \
     --name kafka \
