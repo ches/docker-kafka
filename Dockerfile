@@ -18,17 +18,18 @@ RUN \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
 
-# The Scala 2.11 build is currently recommended by the project.
-ENV KAFKA_VERSION=0.10.1.1 \
-	KAFKA_SCALA_VERSION=2.11 \
-	KAFKA_JMX_PORT=7203
+# The Scala 2.12 build is currently recommended by the project.
+ENV KAFKA_VERSION=0.10.2.0 \
+	KAFKA_SCALA_VERSION=2.12 \
+	KAFKA_JMX_PORT=7203 \
+  JOLOKIA_AGENT_PORT=8778
 ENV KAFKA_RELEASE_ARCHIVE="kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz"
 
 RUN mkdir /kafka /data /logs
 
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    ca-certificates
+    ca-certificates curl
 
 # Download Kafka binary distribution
 ADD http://www.us.apache.org/dist/kafka/${KAFKA_VERSION}/${KAFKA_RELEASE_ARCHIVE} /tmp/
@@ -48,6 +49,11 @@ RUN tar -zx -C /kafka --strip-components=1 -f ${KAFKA_RELEASE_ARCHIVE} && \
 ADD config /kafka/config
 ADD start.sh /start.sh
 
+# Download Jolokia Agent
+ENV JOLOKIA_AGENT_VERSION=1.3.6
+ADD http://search.maven.org/remotecontent?filepath=org/jolokia/jolokia-jvm/$JOLOKIA_AGENT_VERSION/jolokia-jvm-$JOLOKIA_AGENT_VERSION-agent.jar /jolokia/jolokia-jvm-$JOLOKIA_AGENT_VERSION-agent.jar
+RUN chmod a+r /jolokia/jolokia-jvm-$JOLOKIA_AGENT_VERSION-agent.jar
+
 # Set up a user to run Kafka
 RUN groupadd kafka && \
   useradd -d /kafka -g kafka -s /bin/false kafka && \
@@ -61,12 +67,14 @@ ENV GROUP_MAX_SESSION_TIMEOUT_MS="300000" \
   KAFKA_BROKER_ID="" \
   KAFKA_DEFAULT_REPLICATION_FACTOR="1" \
   KAFKA_DELETE_TOPIC_ENABLE="false" \
+  # KAFKA_ENABLE_JOLOKIA_AGENT="" \
   KAFKA_LOG4J_OPTS="" \
   KAFKA_LOG_FLUSH_SCHEDULER_INTERVAL_MS="9223372036854775807" \
   KAFKA_LOG_RETENTION_HOURS="168" \
   KAFKA_NUM_PARTITIONS="1" \
   KAFKA_RECOVERY_THREADS_PER_DATA_DIR="1" \
-  ZOOKEEPER_CONNECTION_STRING="localhost:2181" \
+  ZOOKEEPER_IP="localhost" \
+  ZOOKEEPER_PORT="2181" \
   ZOOKEEPER_CONNECTION_TIMEOUT_MS="10000" \
   ZOOKEEPER_SESSION_TIMEOUT_MS="10000"
 

@@ -49,13 +49,23 @@ cat /kafka/config/server.properties.template | sed \
 #
 # https://issues.apache.org/jira/browse/CASSANDRA-7087
 if [ -z $KAFKA_JMX_OPTS ]; then
+    LONG_HOSTNAME=$(hostname -f)
     KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote=true"
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.authenticate=false"
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.ssl=false"
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=${KAFKA_JMX_PORT:-7203}"
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.net.preferIPv4Stack=true"
-    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${JAVA_RMI_SERVER_HOSTNAME:-$HOSTNAME} "
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${JAVA_RMI_SERVER_HOSTNAME:-$LONG_HOSTNAME} "
     export KAFKA_JMX_OPTS
+fi
+
+if [ -z $JMX_PORT ]; then
+    export JMX_PORT="${KAFKA_JMX_PORT:-7203}"
+fi
+
+if [ -n $KAFKA_ENABLE_JOLOKIA_AGENT ]; then
+  KAFKA_JOLOKIA_LISTEN_ADDR=$(hostname -f)
+  export KAFKA_OPTS="$KAFKA_OPTS -javaagent:/jolokia/jolokia-jvm-1.3.6-agent.jar=host=$KAFKA_JOLOKIA_LISTEN_ADDR"
 fi
 
 # awful no-good hack for dealing with mounted FS
