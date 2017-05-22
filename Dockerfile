@@ -7,7 +7,7 @@
 # performance.
 
 FROM netflixoss/java:8
-MAINTAINER Ches Martin <ches@whiskeyandgrits.net>
+MAINTAINER Matthias Wessendorf <matzew@apache.org>
 
 # The Scala 2.11 build is currently recommended by the project.
 ENV KAFKA_VERSION=0.10.2.0 KAFKA_SCALA_VERSION=2.12 JMX_PORT=7203
