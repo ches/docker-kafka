@@ -1,4 +1,4 @@
-# Builds an image for Apache Kafka 0.8.1.1 from binary distribution.
+# Builds an image for Apache Kafka from binary distribution.
 #
 # The netflixoss/java base image runs Oracle Java 8 installed atop the
 # ubuntu:trusty (14.04) official image. Docker's official java images are
@@ -9,8 +9,8 @@
 FROM netflixoss/java:8
 MAINTAINER Ches Martin <ches@whiskeyandgrits.net>
 
-# The Scala 2.11 build is currently recommended by the project.
-ENV KAFKA_VERSION=0.10.2.0 KAFKA_SCALA_VERSION=2.12 JMX_PORT=7203
+# The Scala 2.12 build is currently recommended by the project.
+ENV KAFKA_VERSION=0.10.2.1 KAFKA_SCALA_VERSION=2.12 JMX_PORT=7203
 ENV KAFKA_RELEASE_ARCHIVE kafka_${KAFKA_SCALA_VERSION}-${KAFKA_VERSION}.tgz
 
 RUN mkdir /kafka /data /logs

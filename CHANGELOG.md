@@ -3,6 +3,10 @@ Release Notes
 
 ## latest - running releases of `latest` tag
 
+### Changed
+
+- Update to Kafka 0.10.2.1
+
 ### Fixed
 
 - Fixed incorrect variable name substitution for `KAFKA_AUTO_CREATE_TOPICS_ENABLE` (#43)
