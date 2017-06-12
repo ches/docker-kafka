@@ -141,6 +141,10 @@ with their default values, if any:
 
   Maps to Kafka's `log.message.format.version`. Specifies the protocol version
   with which your cluster communicates with its consumers.
+- `KAFKA_LOG_RETENTION_HOURS=168`
+
+  Maps to Kafka's `log.retention.hours`. The number of hours to keep a log file
+  before deleting it.
 - `JAVA_RMI_SERVER_HOSTNAME=$KAFKA_ADVERTISED_HOST_NAME`
 
   Maps to the `java.rmi.server.hostname` JVM property, which is used to bind the
