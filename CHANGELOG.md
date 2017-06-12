@@ -1,9 +1,11 @@
 Release Notes
 =============
 
-## latest - Unreleased
+## latest - running releases of `latest` tag
 
-No changes yet.
+### Fixed
+
+- Fixed incorrect variable name substitution for `KAFKA_AUTO_CREATE_TOPICS_ENABLE` (#43)
 
 ## 0.10.2.0 - 31 March, 2017
 
