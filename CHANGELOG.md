@@ -3,6 +3,15 @@ Release Notes
 
 ## latest - running releases of `latest` tag
 
+No changes yet.
+
+## 0.10.2.1 - 12 June, 2017
+
+### Added
+
+- Allow configuration of `num.partitions` ([sjking], #40)
+- Allow configuration of `log.retention.hours` (#42)
+
 ### Changed
 
 - Update to Kafka 0.10.2.1
