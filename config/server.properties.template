@@ -46,7 +46,7 @@ log.dirs=/data
 
 # The number of logical partitions per topic per server. More partitions allow greater parallelism
 # for consumption, but also mean more files.
-num.partitions=1
+num.partitions={{KAFKA_NUM_PARTITIONS}}
 
 ############################# Log Retention Policy #############################
 
