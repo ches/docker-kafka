@@ -129,6 +129,7 @@ with their default values, if any:
 
   Maps to Kafka's `num.partitions` setting. The default number of log partitions
   per topic.
+
 - `KAFKA_AUTO_CREATE_TOPICS_ENABLE=true`
 
   Maps to Kafka's `auto.create.topics.enable`.
@@ -145,6 +146,10 @@ with their default values, if any:
 
   Maps to Kafka's `log.retention.hours`. The number of hours to keep a log file
   before deleting it.
+- `KAFKA_OFFSETS_RETENTION_MINUTES=1440`
+
+  Maps to Kafka's `offsets.retention.minutes`. The number of minutes to keep 
+  an offset for a consumer group before deleting it.
 - `JAVA_RMI_SERVER_HOSTNAME=$KAFKA_ADVERTISED_HOST_NAME`
 
   Maps to the `java.rmi.server.hostname` JVM property, which is used to bind the
