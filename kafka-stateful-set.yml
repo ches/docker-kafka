@@ -33,23 +33,6 @@ spec:
     metadata:
       labels:
         app: kafka
-      annotations:
-        pod.alpha.kubernetes.io/initialized: "true"
-        scheduler.alpha.kubernetes.io/affinity: >
-            {
-              "podAntiAffinity": {
-                "requiredDuringSchedulingRequiredDuringExecution": [{
-                  "labelSelector": {
-                    "matchExpressions": [{
-                      "key": "app",
-                      "operator": "In",
-                      "values": ["kafka-headless"]
-                    }]
-                  },
-                  "topologyKey": "kubernetes.io/hostname"
-                }]
-              }
-            }
     spec:
       containers:
       - name: kafka
