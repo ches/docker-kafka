@@ -145,6 +145,22 @@ with their default values, if any:
 
   Maps to Kafka's `log.retention.hours`. The number of hours to keep a log file
   before deleting it.
+
+- `KAFKA_MESSAGE_MAX_BYTES`
+
+  Maps to Kafka's `message.max.bytes`. The maximum size of message that the
+  server can receive. Default: 1000012
+
+- `KAFKA_REPLICA_FETCH_MAX_BYTES`
+
+  Maps to Kafka's `replica.fetch.max.bytes`. The number of bytes of messages to 
+  attempt to fetch for each partition. This is not an absolute maximum, if 
+  the first message in the first non-empty partition of the fetch is larger 
+  than this value, the message will still be returned to ensure that progress 
+  can be made. The maximum message size accepted by the broker is defined via 
+  message.max.bytes (broker config) or max.message.bytes (topic config). 
+  Default: 1048576
+
 - `JAVA_RMI_SERVER_HOSTNAME=$KAFKA_ADVERTISED_HOST_NAME`
 
   Maps to the `java.rmi.server.hostname` JVM property, which is used to bind the

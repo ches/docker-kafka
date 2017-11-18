@@ -74,5 +74,7 @@ controlled.shutdown.enable=true
 group.max.session.timeout.ms={{KAFKA_GROUP_MAX_SESSION_TIMEOUT_MS}}
 inter.broker.protocol.version={{KAFKA_INTER_BROKER_PROTOCOL_VERSION}}
 log.message.format.version={{KAFKA_LOG_MESSAGE_FORMAT_VERSION}}
+message.max.bytes={{KAFKA_MESSAGE_MAX_BYTES}}
+replica.fetch.max.bytes={{KAFKA_REPLICA_FETCH_MAX_BYTES}}
 
 # vim:set filetype=jproperties
