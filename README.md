@@ -77,7 +77,10 @@ development environment with Kafka ports mapped directly to localhost, for
 instance if you're writing a producer or consumer and want to avoid rebuilding a
 container for it to run in as you iterate. This requires that localhost is your
 Docker host, i.e. your workstation runs Linux. If you're using something like
-boot2docker, substitute the value of `boot2docker ip` below.
+boot2docker, substitute the value of `boot2docker ip` below. If you're using OSX,
+substitute the value of the two `env`parameters with your machine ip 
+(e.g. `192.168.1.100`) and volumes paths with relative ones (e.g. `data` instead
+of `./data`).
 
 ```bash
 $ mkdir -p kafka-ex/{data,logs} && cd kafka-ex
