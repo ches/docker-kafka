@@ -189,6 +189,11 @@ with their default values, if any:
   will create the path in ZK automatically; with earlier versions, you must
   ensure it is created before starting brokers.
 
+- `KAFKA_SERVER_CONFIG=<comma separated configuration.setting=value>`
+
+  Allows direct addition to the server.properties file for testing more complex 
+  options.
+
 JMX
 ---
 
