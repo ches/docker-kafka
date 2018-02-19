@@ -76,5 +76,6 @@ inter.broker.protocol.version={{KAFKA_INTER_BROKER_PROTOCOL_VERSION}}
 log.message.format.version={{KAFKA_LOG_MESSAGE_FORMAT_VERSION}}
 message.max.bytes={{KAFKA_MESSAGE_MAX_BYTES}}
 replica.fetch.max.bytes={{KAFKA_REPLICA_FETCH_MAX_BYTES}}
+unclean.leader.election.enable={{KAFKA_UNCLEAN_LEADER_ELECTION}}
 
 # vim:set filetype=jproperties

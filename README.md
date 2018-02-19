@@ -189,6 +189,11 @@ with their default values, if any:
   will create the path in ZK automatically; with earlier versions, you must
   ensure it is created before starting brokers.
 
+- `KAFKA_UNCLEAN_LEADER_ELECTION=(true|false)`, Default here: `false`
+  Favour availability over consistency by allowing a non-ISR replica to become
+  a leader for a partition, possibly losing writes. Disabled by default from
+  version `0.11.0.0`
+
 JMX
 ---
 
